@@ -161,8 +161,7 @@ export const handleDoCreateUser = (event) => {
     // Data request to create a new one
 
 
-
-    fetch(MOVIE_APP_API)
+    fetch(MOVIE_APP_API, {method: 'POST'})
         .then(res => res.json())
         .then(res => {
             console.log("res:", res)
