@@ -74,9 +74,8 @@ export const handleDisplayProfile = (event) => {
 
 // Example: get fetch request
 export const handleDisplayUpdate = (event) => {
-    console.log("yo")
     enableModal();
-    //console.log("event :", event);
+    console.log("event :", event);
 
     //TODO: Get Data from user by Id
     //TODO: Map to update form
@@ -86,7 +85,7 @@ export const handleDisplayUpdate = (event) => {
         .then(res => res.json())
         .then(res => {
 
-            modal.main.innerHTML = mapUserToUpdate(res);
+            modal.main.innerHTML = mapUserToUpdate("update", res);
             modal.foot.innerHTML = mapButtonsForUpdate(res.id);
 
 
@@ -101,6 +100,7 @@ export const handleDisplayUpdate = (event) => {
 
 // Example: PUT fetch request
 export const handleDoUpdate = (event) => {
+    console.log(event);
     event.preventDefault();
 
     const form = document.forms.update;
