@@ -16,7 +16,6 @@ export const modal = {
 }
 
 
-
 // Handles creating the confirmation view to delete
 export const handleDeleteView = (event) => {
     console.log("handle Delete")
@@ -47,7 +46,6 @@ const handleDoDelete = (event) => {
             console.log("res :", res);
             disableModal();
         })
-
 
 
 }
@@ -94,12 +92,10 @@ export const handleDisplayUpdate = (event) => {
             $("button.confirm.update").click(handleDoUpdate);
 
 
-
         })
 
 
 };
-
 
 
 // Example: PUT fetch request
@@ -138,7 +134,7 @@ export const handleCreateUserView = (event) => {
     // Inputs!
 
     modal.main.innerHTML = mapUserCreateForm();
-    modal.foot.innerHTML = mapButtonsForUpdate(0,"create")
+    modal.foot.innerHTML = mapButtonsForUpdate(0, "create")
 
     $("button.confirm.create").click(handleDoCreateUser);
     enableModal();
@@ -153,22 +149,26 @@ export const handleDoCreateUser = (event) => {
 
     const form = document.forms.create;
 
-    let data = {
-        title: form.title.value,
-        rating: form.rating.value,
-    }
 
     // Data request to create a new one
 
 
-    fetch(MOVIE_APP_API, {method: 'POST'})
+    fetch(MOVIE_APP_API, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: form.title.value,
+            rating: form.rating.value,
+        })
+    })
         .then(res => res.json())
         .then(res => {
             console.log("res:", res)
         })
 
 }
-
 
 
 // Modal handling

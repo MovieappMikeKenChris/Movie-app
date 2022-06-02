@@ -12,7 +12,7 @@ export const mapUserToRecord = ({id, firstName, lastName, picture, title}) => {
                             <img src="${picture}">
                        </td>
                        <td data-id="${id}" class="user-record">${title}. ${firstName} ${lastName}</td>
-              
+
                        <td>
                             <button class="delete" value="${id}">X</button>
                             <button class="edit" value="${id}">Edit</button>
