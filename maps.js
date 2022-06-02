@@ -20,8 +20,12 @@ export const mapUserToRecord = ({id, firstName, lastName, picture, title}) => {
                    </tr>`
     };
 
-export const mapUserToUpdate = (data) => {
-    return createForm("update", data)
+export const mapUserToUpdate = (name = "update") => {
+    const formDefaults = {
+        title: "",
+        rating: ""
+    }
+    return createForm(name, formDefaults)
 
 }
 

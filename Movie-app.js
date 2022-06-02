@@ -11,13 +11,13 @@ import {
 
 const loader = document.querySelector('#loader')
 
-const createMovie = ({title, rating}) => {
+const createMovie = ({id, title, rating}) => {
     document.getElementById("content").innerHTML +=
         `
-    <div class="poster">
+    <div data-id="${id}">
         <h4>${title}</h4>
         <h5>Rating: ${rating}</h5>
-    
+        <button class="edit" value="${id}">Edit</button>
     </div>
     `
 }
@@ -32,7 +32,9 @@ fetch(MOVIE_APP_API)
             }
 
         })
+        $("#create").click(handleCreateUserView);
+        $(".delete").click(handleDeleteView);
+        $(".edit").click(handleDisplayUpdate);
     })
 
 
-$("#create").click(handleCreateUserView);

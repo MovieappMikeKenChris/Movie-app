@@ -74,6 +74,7 @@ export const handleDisplayProfile = (event) => {
 
 // Example: get fetch request
 export const handleDisplayUpdate = (event) => {
+    console.log("yo")
     enableModal();
     //console.log("event :", event);
 
@@ -81,7 +82,7 @@ export const handleDisplayUpdate = (event) => {
     //TODO: Map to update form
     //TODO: Add handlers
 
-    fetch(baseURL + "/user/" + event.target.value, fetchSettings)
+    fetch(MOVIE_APP_API + event.target.value)
         .then(res => res.json())
         .then(res => {
 
@@ -104,23 +105,18 @@ export const handleDoUpdate = (event) => {
 
     const form = document.forms.update;
 
-    let data = {
-        id: form.id.value,
-        firstName: form.firstName.value,
-        lastName: form.lastName.value,
-        gender: form.gender.value,
-        dateOfBirth: form.dateOfBirth.value,
-        phone: form.phone.value,
-        picture: form.picture.value
-    }
 
-    let settings = {
-        ...fetchSettings,
-        method: "PUT",
-        body: JSON.stringify(data)
-    }
 
-    fetch(baseURL + "/user/" + event.target.value, settings)
+    fetch(MOVIE_APP_API + event.target.value, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: form.title.value,
+            rating: form.rating.value
+        })
+    })
         .then(res => res.json())
         .then(res => {
             console.log("res:", res);
