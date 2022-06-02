@@ -1,11 +1,60 @@
 .hidden{
     display: none;
 }
+body{
+    background-image: url("/images/cinema-1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    z-index: 1;
+}
+#content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+#card{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    columns: 3;
+    background-color: rgba(1, 1, 1, 0.23);
+    color: whitesmoke;
+    font-family: 'IM Fell English SC', serif;
+}
+button{
+    background-color: rgba(59, 59, 59, 0.64);
+    color: lightgray;
+    font-family: 'IM Fell English SC', serif;
+}
+.title{
+    text-align: center;
+}
+.rating{
+    text-align: center;
+}
+.edit{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-family: 'IM Fell English SC', serif;
+}
+.delete{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-family: 'IM Fell English SC', serif;
+}
+h1{
+    color: whitesmoke;
+    text-align: center;
+    font-family: 'IM Fell English SC', serif;
+}
 
 #modal-container {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(189, 210, 182, 0.56);
+    background-color: rgba(100, 100, 100, 0.24);
     position: fixed;
     z-index: 998;
     top:0;
@@ -14,7 +63,7 @@
 
 #modal {
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.75);
     width: 500px;
     z-index: 999;
     opacity: 1;
@@ -29,7 +78,7 @@
 
 
 #modal > header {
-    background-color: #009879;
+    background-color: red;
     padding: 10px;
     color: #fff;
     border-top-left-radius: 10px;
@@ -58,3 +107,7 @@
     justify-content: flex-end;
 
 }
+#create{
+    width: 100px;
+}
+

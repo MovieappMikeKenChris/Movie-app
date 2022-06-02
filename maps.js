@@ -50,38 +50,6 @@ export const createForm = (name, {title, rating}) => {
     `
 }
 
-
-export const mapUserToView =
-    ({id, title, firstName, lastName, gender, email, dateOfBirth, phone, picture, location}) => {
-
-        // handle Z in data for timezone, might need to add back for update
-        dateOfBirth = dateOfBirth.slice(0, dateOfBirth.length - 1);
-
-        console.log("location:", location)
-        return `
-       <div class="profile">
-                <section class="header">
-                    <img src="${picture}" alt="${firstName} ${lastName}" class="profile-img" />
-                    <h3 class="profile-header">${firstName} ${lastName}</h3>
-                    <p class="sub-header"><a href="mailto:">${email}</a></p>
-                </section>
-
-                <section class="location">
-                    <h4>Address</h4>
-                    <div class="address">${location.street}</div>
-                    <div class="address">${location.city}, ${location.state}</div>
-                </section>
-
-                <section class="details">
-                    <h4>Details</h4>
-                    <div>Phone: <span>${phone}</span> </div>
-                    <div>Gender: <span>${gender}</span></div>
-                    <div>Title:  <span>${title}</span></div>
-                </section>
-       </div>
-    `
-    }
-
 export const mapButtonsForUpdate = (id, type = 'update') => {
     return ` <form>
           <button class="confirm ${type}" value="${id}">Confirm</button>

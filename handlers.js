@@ -1,4 +1,5 @@
-import {mapButtonsForUpdate, mapUserCreateForm, mapUserToDelete, mapUserToUpdate, mapUserToView} from "/maps.js";
+
+import {mapButtonsForUpdate, mapUserCreateForm, mapUserToDelete, mapUserToUpdate} from "/maps.js";
 import {MOVIE_APP_API} from "/keys.js";
 
 
@@ -21,8 +22,8 @@ export const handleDeleteView = (event) => {
     console.log("handle Delete")
     toggleModal();
 
-    modal.head.innerHTML = `<h3>Do you wish to delete this User?</h3>`
-    modal.main.innerHTML = "<p>If you delete this User its gone forever.</p>"
+    modal.head.innerHTML = `<h3>Do you wish to delete this Film?</h3>`
+    modal.main.innerHTML = "<p>If you delete this Film its gone forever.</p>"
     modal.foot.innerHTML = mapUserToDelete(event.target.value);
 
     $("button.confirm").click(handleDoDelete);
@@ -37,39 +38,21 @@ const handleDoDelete = (event) => {
     // TODO: Hide Modal
     // TODO: Reload form
 
-    let settings = fetchSettings;
-    settings.method = "DELETE";
 
-    fetch(baseURL + "/user/" + event.target.value, settings)
+    fetch(MOVIE_APP_API + event.target.value, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
         .then(res => res.json())
         .then(res => {
-            console.log("res :", res);
+            console.log("res:", res);
             disableModal();
         })
 
-
 }
 
-
-// Example: get fetch request
-export const handleDisplayProfile = (event) => {
-    toggleModal();
-    // TODO: Create fetch to get the profile information
-    // TODO: Map info to modal in view.
-
-    // console.log("event.target.dataset.id", event.target.dataset.id);
-
-    fetch(baseURL + "/user/" + event.target.dataset.id, fetchSettings)
-        .then(res => res.json())
-        .then(res => {
-            // console.log("res user:", res)
-            modal.main.innerHTML = mapUserToView(res);
-            modal.foot.innerHTML = `<button class="close-modal">Close</button>`
-
-            $(".close-modal").click(() => disableModal());
-
-        })
-}
 
 
 // Example: get fetch request
@@ -162,6 +145,7 @@ export const handleDoCreateUser = (event) => {
         .then(res => res.json())
         .then(res => {
             console.log("res:", res)
+            disableModal();
         })
 
 }
@@ -170,8 +154,8 @@ export const handleDoCreateUser = (event) => {
 // Modal handling
 export const toggleModal = () => {
     // show hide modal logic
-    modal.container.classList.toggle("hide")
-    modal.all.classList.toggle("hide");
+    modal.container.classList.toggle("hidden")
+    modal.all.classList.toggle("hidden");
 }
 
 export const enableModal = () => {
