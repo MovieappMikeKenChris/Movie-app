@@ -1,21 +1,22 @@
-import {MOVIE_APP_API} from "/keys.js"
-import {POSTER_API_KEY} from "/keys.js"
-import {POSTER_API} from "/keys.js"
+import {MOVIE_APP_API} from "./keys.js"
+import {POSTER_API} from "./keys.js"
 
-import {mapUserToRecord } from "/maps.js";
+import {mapUserToRecord } from "./maps.js";
 import {
     handleDisplayUpdate, handleDeleteView,
     toggleModal, modal,
     handleCreateUserView
-} from "/handlers.js";
+} from "./handlers.js";
 
 const loader = document.querySelector('#loader')
 
-const createMovie = ({id, title, rating}) => {
+const createMovie = ({id, title, rating}, OMDB) => {
+    
     document.getElementById("content").innerHTML +=
         `
     <div data-id="${id}" id="card">
         <h2 class="title">${title}</h2>
+        <img src="${OMDB?.Poster}" alt="">
         <h4 class="rating">Rating: ${rating}</h4>
         <button class="edit" value="${id}">Edit</button>
         <button class="delete" value="${id}">Delete</button>
@@ -29,13 +30,24 @@ fetch(MOVIE_APP_API)
         console.log(res)
         res.forEach((movie) => {
             if (typeof movie.title === 'string' && movie.title !== '') {
-                createMovie(movie)
+                getMovieOMDB(movie.title).then((res) => {
+                    createMovie(movie, res?.Search?.[0])
+
+                    $(".delete").click(handleDeleteView);
+                    $(".edit").click(handleDisplayUpdate);
+                })
+                
             }
 
         })
         $("#create").click(handleCreateUserView);
-        $(".delete").click(handleDeleteView);
-        $(".edit").click(handleDisplayUpdate);
+
     })
+const getMovieOMDB = title => {
+    return fetch(POSTER_API + `&s=${title}`, {method: "GET"})
+        .then((res) => res.json())
+}
+
+
 
 

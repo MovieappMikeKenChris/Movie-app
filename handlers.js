@@ -1,6 +1,6 @@
 
-import {mapButtonsForUpdate, mapUserCreateForm, mapUserToDelete, mapUserToUpdate} from "/maps.js";
-import {MOVIE_APP_API} from "/keys.js";
+import {mapButtonsForUpdate, mapUserCreateForm, mapUserToDelete, mapUserToUpdate} from "./maps.js";
+import {MOVIE_APP_API} from "./keys.js";
 
 
 /**
