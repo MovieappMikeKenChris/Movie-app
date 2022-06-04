@@ -1,5 +1,6 @@
 
 import {mapButtonsForUpdate, mapUserCreateForm, mapUserToDelete, mapUserToUpdate} from "./maps.js";
+import {runMovieApp} from "./Movie-app.js"
 import {MOVIE_APP_API} from "./keys.js";
 
 
@@ -49,6 +50,7 @@ const handleDoDelete = (event) => {
         .then(res => {
             console.log("res:", res);
             disableModal();
+            runMovieApp();
         })
 
 }
@@ -105,6 +107,7 @@ export const handleDoUpdate = (event) => {
             console.log("res:", res);
             // TODO: use this value to update the field record in the table
             disableModal();
+            runMovieApp();
         })
 }
 
@@ -117,6 +120,7 @@ export const handleCreateUserView = (event) => {
 
     $("button.confirm.create").click(handleDoCreateUser);
     enableModal();
+
 
 }
 
@@ -146,6 +150,7 @@ export const handleDoCreateUser = (event) => {
         .then(res => {
             console.log("res:", res)
             disableModal();
+            runMovieApp();
         })
 
 }

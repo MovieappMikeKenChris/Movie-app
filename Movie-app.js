@@ -1,7 +1,8 @@
+
 import {MOVIE_APP_API} from "./keys.js"
 import {POSTER_API} from "./keys.js"
 
-import {mapUserToRecord } from "./maps.js";
+import {mapUserToRecord} from "./maps.js";
 import {
     handleDisplayUpdate, handleDeleteView,
     toggleModal, modal,
@@ -11,7 +12,6 @@ import {
 const loader = document.querySelector('#loader')
 
 const createMovie = ({id, title, rating}, OMDB) => {
-    
     document.getElementById("content").innerHTML +=
         `
     <div data-id="${id}" id="card">
@@ -23,31 +23,35 @@ const createMovie = ({id, title, rating}, OMDB) => {
     </div>
     `
 }
-fetch(MOVIE_APP_API)
-    .then($("#loader").addClass("hidden"))
-    .then((res) => res.json())
-    .then((res) => {
-        console.log(res)
-        res.forEach((movie) => {
-            if (typeof movie.title === 'string' && movie.title !== '') {
-                getMovieOMDB(movie.title).then((res) => {
-                    createMovie(movie, res?.Search?.[0])
+export const runMovieApp = () => {
+    fetch(MOVIE_APP_API)
+        .then($("#loader").addClass("hidden"))
+        .then((res) => res.json())
+        .then((res) => {
+            $("#content").html("")
+            console.log(res)
+            res.forEach((movie) => {
+                if (typeof movie.title === 'string' && movie.title !== '') {
+                    getMovieOMDB(movie.title).then((res) => {
+                        createMovie(movie, res?.Search?.[0])
 
-                    $(".delete").click(handleDeleteView);
-                    $(".edit").click(handleDisplayUpdate);
-                })
-                
-            }
+                        $(".delete").click(handleDeleteView);
+                        $(".edit").click(handleDisplayUpdate);
+                    })
+
+                }
+
+            })
+            $("#create").click(handleCreateUserView);
 
         })
-        $("#create").click(handleCreateUserView);
-
-    })
+}
 const getMovieOMDB = title => {
     return fetch(POSTER_API + `&s=${title}`, {method: "GET"})
         .then((res) => res.json())
 }
 
+runMovieApp()
 
 
 
