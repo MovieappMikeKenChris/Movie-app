@@ -25,8 +25,8 @@ const createMovie = ({id, title, rating}, OMDB) => {
 }
 export const runMovieApp = () => {
     fetch(MOVIE_APP_API)
-        .then($("#loader").addClass("hidden"))
         .then((res) => res.json())
+        .then($("#loader").addClass("hidden"))
         .then((res) => {
             $("#content").html("")
             console.log(res)
